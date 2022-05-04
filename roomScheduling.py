@@ -87,6 +87,19 @@ parser.add_argument('--tv', required=True,
 args = parser.parse_args()
 
 ################################################## GENERATE SCHEDULE ###############################################
+
+def sanity_check(capacity, projector, tv):
+    if capacity > MAX_CAP:
+        print('Too many people. Max room capacity is', MAX_CAP)
+        return False
+    elif projector > MAX_PROJ:
+        print('Too many people. Max number of projector is', MAX_PROJ)
+        return False
+    elif tv > MAX_TV:
+        print('Too many people. Max number of tv is', MAX_TV)
+        return False
+    return True
+
 def main(start, end, floor, capacity, projector, tv):
     score = []
     if not sanity_check(capacity, projector, tv):
@@ -104,15 +117,3 @@ def main(start, end, floor, capacity, projector, tv):
 main(args.start, args.end, int(args.floor), int(args.capacity), int(args.projector), int(args.tv))
 
 
-##### OTHERS #####
-def sanity_check(capacity, projector, tv):
-    if capacity > MAX_CAP:
-        print('Too many people. Max room capacity is', MAX_CAP)
-        return False
-    else if projector > MAX_PROJ:
-        print('Too many people. Max number of projector is', MAX_PROJ)
-        return False
-    else if tv > MAX_TV:
-        print('Too many people. Max number of tv is', MAX_TV)
-        return False
-    return True
